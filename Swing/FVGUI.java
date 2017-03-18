@@ -1,5 +1,5 @@
 /* Copyright (c) 2011-2012 Daniel Cumberbatch
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,7 +10,7 @@
  *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,13 +32,13 @@ import Constants.*;
 import Scale.Note.*;
 import java.awt.print.*;
 
-class PrintUtilities implements Printable 
-{     
+class PrintUtilities implements Printable
+{
     public PrintUtilities(Component componentToBePrinted)  //constructor
     {
 	this.componentToBePrinted = componentToBePrinted;
     }
-  
+
     public static void printComponent(Component c) //this is static hence the creation of temporary
     {
 	new PrintUtilities(c).print();
@@ -49,11 +49,11 @@ class PrintUtilities implements Printable
 	PrinterJob printJob = PrinterJob.getPrinterJob(); //static factory method
 	printJob.setPrintable(this); //assign this.paint() to PrinterJob to render pages
 	if (printJob.printDialog()) //returns boolean (rather than int) = true if user doesn't cancel the dialog
-	        try 
+	        try
 		    {
 			printJob.print(); //calls print method of the prinateble class
-		    } 
-		catch(PrinterException pe) 
+		    }
+		catch(PrinterException pe)
 		    {
 			System.out.println("Error printing: " + pe);
 		    }
@@ -73,14 +73,14 @@ class PrintUtilities implements Printable
 	}
     }
 
-    public static void disableDoubleBuffering(Component c) 
+    public static void disableDoubleBuffering(Component c)
     {
 	RepaintManager currentManager = RepaintManager.currentManager(c);
 	currentManager.setDoubleBufferingEnabled(false);
     }
 
     /*
-      public static void enableDoubleBuffering(Component c) 
+      public static void enableDoubleBuffering(Component c)
       {
       RepaintManager currentManager = RepaintManager.currentManager(c);
       currentManager.setDoubleBufferingEnabled(true);
@@ -89,7 +89,7 @@ class PrintUtilities implements Printable
     private Component componentToBePrinted;
 }
 
-//subclass representing dynamically allocated JMenuItem with default 
+//subclass representing dynamically allocated JMenuItem with default
 //implementation for ActionListener bound to it.
 @SuppressWarnings("serial")
 class dynMenuItem extends JMenuItem implements ActionListener
@@ -121,7 +121,7 @@ class dynMenuItem extends JMenuItem implements ActionListener
 	    {
 		dynMenuItem tmp = (dynMenuItem)jm.getItem(i);
 		if(i < 10)
-		    tmp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_0+i, InputEvent.META_MASK)); 
+		    tmp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_0+i, InputEvent.META_MASK));
 	    }
     }
 
@@ -177,7 +177,7 @@ class FVBrowser extends JFrame
         jpnMW.setLayout(new BorderLayout());
         jpnMW.setOpaque(true);
 	jpnMW.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-	
+
         String path = "File://" + (new File(file)).getAbsolutePath();
 	final String homePath = path;
 	urls.add(homePath);
@@ -326,7 +326,7 @@ class FVBrowser extends JFrame
 	    {
 		public void actionPerformed(ActionEvent ae)
 		{
-		    
+
 		}
 	    });
 
@@ -341,13 +341,13 @@ class FVBrowser extends JFrame
 	jtb.add(jtfSearch);
 
 	jpnMW.add(jtb, BorderLayout.NORTH);
-	
+
 	JPanel jpnTW = new JPanel();
 	jpnTW.setLayout(new BorderLayout());
 	jpnTW.setOpaque(true);
 	jpnTW.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-	
-	jpnTW.add(new JScrollPane(editorPane), BorderLayout.CENTER);       
+
+	jpnTW.add(new JScrollPane(editorPane), BorderLayout.CENTER);
 	jpnMW.add(jpnTW, BorderLayout.CENTER);
 	getContentPane().add(jpnMW);
 	setVisible(false);
@@ -361,9 +361,9 @@ class FVGUI
     JFileChooser jfcOpen, jfcSave, jfcDefaultDir; //for generating open and save dialogs
     String[] scaleCat = {"Major", "Minor", "Major Pentatonic", "Minor Pentatonic", "Blues", "Natural Minor"}; //Fixed Scale categories
     String[] fixedKey = {"Ab","A","A#","Bb","B","B#","Cb","C","C#","Db","D","D#","Eb","E","E#","Fb","F","F#","Gb","G","G#"}; //Notes
-    Integer[] num_frets_list = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24}; //number of frets adoptable by scales 
+    Integer[] num_frets_list = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24}; //number of frets adoptable by scales
     Vector<Scale> scales = new Vector<Scale>(); //storage container for scales
-    JButton jbtnAddNote, jbtnRemoveNote, jbtnClearScale; 
+    JButton jbtnAddNote, jbtnRemoveNote, jbtnClearScale;
     JMenu jmWindow;
     JMenuItem jmiEmpty;
     String defaultDir;
@@ -417,7 +417,7 @@ class FVGUI
 
     //writes a properly formatted fv file for the scale stored in the idx'th element of scales
     //return boolean reflecting the success of the write
-    boolean writeFile(File file, int idx) 
+    boolean writeFile(File file, int idx)
     {
 	try {
 	    PrintWriter out = new PrintWriter (new BufferedWriter (new FileWriter(file)));
@@ -446,26 +446,26 @@ class FVGUI
 	}
 	return true;
     }
-    
+
     //generates and returns a Scale with specified category and key
     Scale generateFixedScale(int c, String k)
     {
 	Scale sc = new Scale(c, k); //generate new scale
-	sc.setMarker(defaultMarkerIndex, defaultMarkerColour); //set Marker 
+	sc.setMarker(defaultMarkerIndex, defaultMarkerColour); //set Marker
 	scales.add(sc); //Adds Scale to Vector<Scale>
 	return sc;
     }
 
     //parse new category, key and the selected index of the tabbedpane containing the scales
     JLabel[] replaceFixedScale(int c, String k, int idx)
-    {	
+    {
 	int num_frets = scales.elementAt(idx).get_num_frets(); //retrieve current number of frets of selected scale
 	int font_size = scales.elementAt(idx).get_font_size(); //retrieve current font size of selected scale
-	
+
 	Scale sc = new Scale(c, k); //generate a new Scale with new cat and key
 	sc.setMarker(defaultMarkerIndex, defaultMarkerColour);
 	sc.set_font_size(font_size); //set font size to previous
-	
+
 	scales.setElementAt(sc, idx); //replace old Scale in Vector<Scale> object, scales, at correct index with new Scale
 
 	//regenerate JLabel here since we need both the new Scale and num_frets  and we can't parse both as return values
@@ -514,8 +514,8 @@ class FVGUI
     }
 
     // returns JLabel array containing Scale header and corresponding image of Scale fretboard
-    // of Scale argument, displaying a specified number of frets with the fretboard of a 
-    // specified font size (font is courier-new) 
+    // of Scale argument, displaying a specified number of frets with the fretboard of a
+    // specified font size (font is courier-new)
     JLabel[] jlabScale(Scale sc, int num_frets, int fsz)
     {
 	sc.set_font_size(fsz);
@@ -549,7 +549,7 @@ class FVGUI
         jpnFbOuter.add(jscrlpFb);
 	return jpnFbOuter;
     }
-    
+
     // returns a JButton with specified actionCommand and image icon
     // to be used in Toolbar
     /*JButton jbtnToolBar(String name, String filename)
@@ -569,15 +569,15 @@ class FVGUI
 	jfrm = new JFrame("FretVieW");
 	jfrm.setSize(1600, 600);
 	jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
+
 	//Generate Help and welcome pallette
 	//helpPallette = new FVBrowser("FretVieW Help", "testpages/page1.html",1000,1000);
-        helpPallette = new FVBrowser("FretVieW Help", "help/index.html",1000,1000);
-	welcomePallette = new FVBrowser("Welcome to FretVieW", "help/welcome.html",500,500);
-        quickstartPallette = new FVBrowser("FretVieW Quick Start", "help/quickstart.html",500,500);
-        releasenotesPallette = new FVBrowser("FretVieW Release Notes", "help/releasenotes.html",500,500);
+        //helpPallette = new FVBrowser("FretVieW Help", "help/index.html",1000,1000);
+	//welcomePallette = new FVBrowser("Welcome to FretVieW", "help/welcome.html",500,500);
+        //quickstartPallette = new FVBrowser("FretVieW Quick Start", "help/quickstart.html",500,500);
+        //releasenotesPallette = new FVBrowser("FretVieW Release Notes", "help/releasenotes.html",500,500);
 
-	//Generate main window 
+	//Generate main window
 	JPanel jpnMW = new JPanel();
         jpnMW.setLayout(new BorderLayout());
         jpnMW.setOpaque(true);
@@ -605,13 +605,13 @@ class FVGUI
 			    Scale scTmp = null;
 			    int cat_arg = 0, num_frets_arg = 0;
 			    String key_arg = null, title_arg = null;
-			    
+
 			    //get title
 			    title_arg = (String) JOptionPane.showInputDialog(jfrm, "Provide Title", "New Scale",
 									     JOptionPane.QUESTION_MESSAGE, null, null, "MyScale" + jtpFb.getTabCount());
-			    if(title_arg == null) 
+			    if(title_arg == null)
 				return;
-			    
+
 			    switch(spec_arg)
 				{
 				case 0:    //Custom Scale
@@ -626,16 +626,16 @@ class FVGUI
 										      JOptionPane.QUESTION_MESSAGE, null, scaleCat, scaleCat[0]);
 				    if(tmp == null)
 					return;
-				    
+
 				    while(cat_arg != scaleCat.length && tmp != scaleCat[cat_arg])
 					++cat_arg;
-				    
+
 				    //get fixed scale key
 				    key_arg = (String) JOptionPane.showInputDialog(jfrm, "Select Key", "New Scale",
 										   JOptionPane.QUESTION_MESSAGE, null, fixedKey, "Ab");
 				    if(key_arg == null)
 					return;
-				    
+
 				    //generate Fixed Scale
 				    scTmp = generateFixedScale(cat_arg+1, key_arg);
 				    if(scTmp == null)
@@ -648,11 +648,11 @@ class FVGUI
 										  JOptionPane.QUESTION_MESSAGE, null, num_frets_list, 1);
 			    if(num_frets_arg == 0)
 				return;
-			    
+
 			    jtpFb.add(title_arg, jpnScale(jlabScale(scTmp, num_frets_arg, Constants.defaultFontSize)));
 			    if(jtpFb.getTabCount() > 1)
 				jtpFb.setSelectedIndex(jtpFb.getTabCount()-1);
-			    
+
 			    if(jmWindow.getItemCount() == 1 && jmWindow.getItem(0) == jmiEmpty)
 				jmWindow.remove(jmiEmpty);
 			    jmWindow.add(new dynMenuItem("Window " + jtpFb.getSelectedIndex() + " - " + jtpFb.getTitleAt(jtpFb.getSelectedIndex()),
@@ -662,12 +662,12 @@ class FVGUI
 		}
 	    });
 	jtb.add(jbtnNew);
-	
+
 	//initialize default directory JFileChooser
 	jfcDefaultDir = new JFileChooser(defaultDir);
 	jfcDefaultDir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 	defaultDir = jfcDefaultDir.getCurrentDirectory().getPath();
-	
+
 	final JButton jbtnOpen = new jbtnToolBar("Open Scale", "images/openScale.gif");
 	jbtnOpen.addActionListener(new ActionListener()
 	    {
@@ -698,7 +698,7 @@ class FVGUI
 		}
 	    });
         jtb.add(jbtnOpen);
-	
+
 	final JButton jbtnClose = new jbtnToolBar("Close Scale", "images/closeScale.gif");
 	jbtnClose.addActionListener(new ActionListener()
 	    {
@@ -711,7 +711,7 @@ class FVGUI
 			    String tName = jtpFb.getTitleAt(idx);
 			    int confirm_arg = JOptionPane.showConfirmDialog(jfrm, "Are you sure you wish to close tab \"" + tName + "\" ?",
 									    "Close Scale", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-			    
+
 			    if(confirm_arg == JOptionPane.YES_OPTION)
 				{
 				    jtpFb.remove(idx);
@@ -762,7 +762,7 @@ class FVGUI
 				}
 			    else
 				status = false;
-					    
+
 			    if(!status)
 				JOptionPane.showMessageDialog(jfrm, "I/O Error saving file!!", "Save Scale", JOptionPane.WARNING_MESSAGE);
 			}
@@ -879,7 +879,7 @@ class FVGUI
 				JOptionPane.showMessageDialog(jfrm, "Maximum number of frets is 24", "Add Fret", JOptionPane.WARNING_MESSAGE);
 			}
 		    else
-			JOptionPane.showMessageDialog(jfrm, "Pallette is Empty!", "Add Fret", JOptionPane.WARNING_MESSAGE);			
+			JOptionPane.showMessageDialog(jfrm, "Pallette is Empty!", "Add Fret", JOptionPane.WARNING_MESSAGE);
 		}
 	    });
         jtb.add(new JToolBar.Separator());
@@ -960,7 +960,7 @@ class FVGUI
                             while(markerIdx != markers.length && !(markers[markerIdx].equals(scales.elementAt(idx).getMarker()))) ++markerIdx;
                             if(markerIdx == markers.length) return;
 
-                            markers = Scale.getMarkers(Constants.defaultMarkerColour); //display list of choices in Constants.defaultMarkerColour just in case someone selects invisible                                                  
+                            markers = Scale.getMarkers(Constants.defaultMarkerColour); //display list of choices in Constants.defaultMarkerColour just in case someone selects invisible
                             for(int i = 0; i != markers.length; ++i) markers[i] = "<html><FONT SIZE=5>" + markers[i].substring(1, markers[i].length()-2) + "</FONT>";
                             String result_m =  (String) JOptionPane.showInputDialog(jfrm, "Select Marker", "Change Marker",
 										    JOptionPane.QUESTION_MESSAGE, null, markers, markers[markerIdx]);
@@ -1015,21 +1015,21 @@ class FVGUI
 	    {
 		public void actionPerformed(ActionEvent ae)
 		{
-		    helpPallette.setVisible(true);
+                  //helpPallette.setVisible(true);
 		}
 	    });
         jtb.add(new JToolBar.Separator());
         jtb.add(jbtnHelp);
 
         jpnMW.add(jtb, BorderLayout.NORTH); //add toolbar to main window
-	
-        // Generate Menus        
+
+        // Generate Menus
 	JMenuBar jmb = new JMenuBar();
-	
+
         //Generate File Menu
         JMenu jmFile = new JMenu("File");
 	jmFile.setMnemonic(KeyEvent.VK_F);
-	
+
 	final JMenuItem jmiNew = new JMenuItem("New Scale", KeyEvent.VK_N);
 	jmiNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.META_MASK));
         jmiNew.addActionListener(new ActionListener()
@@ -1040,7 +1040,7 @@ class FVGUI
 		}
 	    });
 	jmFile.add(jmiNew);
-	
+
         final JMenuItem jmiOpen = new JMenuItem("Open Scale", KeyEvent.VK_O);
 	jmiOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.META_MASK));
         jmiOpen.addActionListener(new ActionListener()
@@ -1128,7 +1128,7 @@ class FVGUI
             });
         jmEdit.add(jmiRename);
 	jmEdit.add(new JSeparator());
-	
+
 	final JMenuItem jmiChangeMarker = new JMenuItem("Change Marker", KeyEvent.VK_M);
 	jmiChangeMarker.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.META_MASK+InputEvent.SHIFT_MASK));
 	jmiChangeMarker.addActionListener(new ActionListener()
@@ -1159,7 +1159,7 @@ class FVGUI
 		}
 	    });
 	jmEdit.add(jmiChangeDefaultDir);
-	
+
 	jmb.add(jmEdit);
 
         //Generate View Menu
@@ -1181,7 +1181,7 @@ class FVGUI
         jmZoom.add(jmiZoomIn);
 
         JMenuItem jmiZoomOut = new JMenuItem("Zoom Out", KeyEvent.VK_MINUS);
-	jmiZoomOut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, InputEvent.META_MASK)); 
+	jmiZoomOut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, InputEvent.META_MASK));
 	jmiZoomOut.addActionListener(new ActionListener()
 	    {
 		public void actionPerformed(ActionEvent ae)
@@ -1259,7 +1259,7 @@ class FVGUI
 
         //Generate Window Menu
         jmWindow = new JMenu("Window");
-	jmiEmpty = new JMenuItem("<empty>"); 
+	jmiEmpty = new JMenuItem("<empty>");
 	jmWindow.add(jmiEmpty);
 	jmiEmpty.setEnabled(false);
 	jmb.add(jmWindow);
@@ -1267,7 +1267,7 @@ class FVGUI
         //Generate Help Menu
         JMenu jmHelp = new JMenu("Help");
 	jmHelp.setMnemonic(KeyEvent.VK_H);
-	
+
         JMenuItem jmiFVHelp = new JMenuItem("FretVieW Help", KeyEvent.VK_H);
 	jmiFVHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.META_MASK+InputEvent.SHIFT_MASK));
 	jmiFVHelp.addActionListener(new ActionListener()
@@ -1283,17 +1283,17 @@ class FVGUI
             {
                 public void actionPerformed(ActionEvent ae)
                 {
-		    welcomePallette.setVisible(true);
+                  //welcomePallette.setVisible(true);
                 }
 	    });
 	jmiWelcome.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.BUTTON3_MASK+2*InputEvent.META_MASK+InputEvent.SHIFT_MASK));
-        
+
 	JMenuItem jmiFVQS = new JMenuItem("FretVieW Quick Start", KeyEvent.VK_Q);
         jmiFVQS.addActionListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent ae)
                 {
-                    quickstartPallette.setVisible(true);
+                  //quickstartPallette.setVisible(true);
                 }
             });
 	jmiFVQS.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.BUTTON3_MASK+2*InputEvent.META_MASK+InputEvent.SHIFT_MASK));
@@ -1303,7 +1303,7 @@ class FVGUI
             {
                 public void actionPerformed(ActionEvent ae)
                 {
-                    releasenotesPallette.setVisible(true);
+                  //releasenotesPallette.setVisible(true);
                 }
             });
 	jmiFVRN.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.BUTTON3_MASK+2*InputEvent.META_MASK+InputEvent.SHIFT_MASK));
@@ -1329,7 +1329,7 @@ class FVGUI
         jmHelp.add(new JSeparator());
         jmHelp.add(jmiAboutFV);
 	jmb.add(jmHelp);
-	
+
 	//Current Directory TextField
 	JLabel jlabCurrDir = new JLabel("Current Directory: ");
 	jtfCurrDir = new JTextField(30);
@@ -1361,7 +1361,7 @@ class FVGUI
 
 	//Generate Ctrl Pane
 	jtpCtrl = new JTabbedPane();
-	
+
 	//Generate Fixed Scale Ctrl Pane
 	JPanel jpnFixedInner = new JPanel();
 	jpnFixedInner.setLayout(new GridLayout(12,1));
@@ -1390,7 +1390,7 @@ class FVGUI
 			    jtpFb.setComponentAt(jtpFb.getSelectedIndex(), jpnScale(replaceFixedScale(cat + 1, key, jtpFb.getSelectedIndex())));
 			}
 		    else
-			JOptionPane.showMessageDialog(jfrm, "Pallette is Empty!", "Fixed Scale Update", JOptionPane.WARNING_MESSAGE); 
+			JOptionPane.showMessageDialog(jfrm, "Pallette is Empty!", "Fixed Scale Update", JOptionPane.WARNING_MESSAGE);
 		}
 	    });
 	jpnFixedInner.add(jbtnFixedUpdate);
@@ -1442,7 +1442,7 @@ class FVGUI
 			    int idx = jtpFb.getSelectedIndex();
 			    int change = jcbScaleChange.getSelectedIndex();
 			    String note = (String) jcbCustomNote.getItemAt(jcbCustomNote.getSelectedIndex());
-			    
+
 			    switch(change)
 				{
 				case 0: //add note
