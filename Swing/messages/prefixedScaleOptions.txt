@@ -1,0 +1,7 @@
+Please select the type of your prefixed scale:
+1. Major
+2. Minor
+3. Major Pentatonic
+4. Minor Pentatonic
+5. Blues
+6. Natural Minor (aka Aeolian Mode)

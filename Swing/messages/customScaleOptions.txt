@@ -1,0 +1,5 @@
+Select option:
+1. Add note to current scale
+2. Remove note from current scale
+3. Clear current scale
+4. Exit FretView

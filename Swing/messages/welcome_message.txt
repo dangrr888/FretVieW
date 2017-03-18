@@ -1,0 +1,11 @@
+Welcome
+
+to
+
+FretVieW (Java v1.0)
+
+by
+
+Dr. Daniel T. Cumberbatch
+
+September 2011
