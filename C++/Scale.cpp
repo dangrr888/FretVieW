@@ -93,19 +93,14 @@ vector<Note> Scale::generateNotes(const vector<string>& notes)
   for(vector<string>::size_type i = 0; i != notes.size(); ++i) //for each string entry in vector
     {
       string::const_iterator j = notes[i].begin(), k;
-      j = find_if(j, notes[i].end(), not_space); //iterate through string to find first non space char 
+      j = find_if(j, notes[i].end(), not_space); //iterate through string to find first non space char
       k = find_if(j, notes[i].end(), space); //iterate to find first space
       if(j != k) //if non-space data exits
-	ret.push_back(string(j,k)); //construct string, return note from string using implicit Note ctor and 
+	ret.push_back(string(j,k)); //construct string, return note from string using implicit Note ctor and
                                     //append to return container
     }
 
   return ret;
-}
-
-CustomScale& CustomScale::operator=(const CustomScale& rhs)
-{
-  Scale::operator=(rhs);
 }
 
 void CustomScale::add(const Note& n)

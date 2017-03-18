@@ -1,9 +1,9 @@
 #ifndef GUARD_FRETBOARD_H
 #define GUARD_FRETBOARD_H
 
-//RAII class 
+//RAII class
 
-#include <tr1/memory>
+#include <memory>
 #include "Note.hpp"
 #include <vector>
 #include <cstddef>
@@ -29,7 +29,7 @@ private:
     : pImpl(new FbImpl) //constructs new implementation object
   {}
 
-  explicit FretBoard(const std::vector<Note>&); //construct FretBoard using a vector of 
+  explicit FretBoard(const std::vector<Note>&); //construct FretBoard using a vector of
                                                 //Note objects
 
   FretBoard(const FretBoard& rhs) //copy constructor - performs deep copy
@@ -40,7 +40,7 @@ private:
 
   std::vector<std::string> make_string(std::size_t, const std::string&, std::size_t) const; //called by display() - constructs strings to be displayed
 
-  std::tr1::shared_ptr<FbImpl> pImpl; //pointer to implementation object (``pimpl idiom'')
+  std::shared_ptr<FbImpl> pImpl; //pointer to implementation object (``pimpl idiom'')
 };
 
 #endif
