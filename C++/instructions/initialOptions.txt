@@ -1,0 +1,3 @@
+Please select option:
+1. Prefixed Scale
+2. Custom Scale
